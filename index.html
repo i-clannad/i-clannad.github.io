@@ -7,66 +7,126 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="style.css">
     <title>个人简历</title>
+
+    <script language="javascript">
+        var t = null;
+
+        t = setTimeout(time, 1000); //开始执行
+
+        function time()
+
+        {
+
+            clearTimeout(t); //清除定时器
+
+            dt = new Date();
+
+            var y = dt.getYear() + 1900;
+
+            var mm = dt.getMonth() + 1;
+
+            var d = dt.getDate();
+
+            var weekday = ["星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六"];
+
+            var day = dt.getDay();
+
+            var h = dt.getHours();
+
+            var m = dt.getMinutes();
+
+            var s = dt.getSeconds();
+
+            if (h < 10) {
+                h = "0" + h;
+            }
+
+            if (m < 10) {
+                m = "0" + m;
+            }
+
+            if (s < 10) {
+                s = "0" + s;
+            }
+
+            document.getElementById("timeShow").innerHTML = "现在的时间为：" + y + "年" + mm + "月" + d + "日" + weekday[day] +
+                "" + h + ": " + m + ": " + s + "";
+            t = setTimeout(time, 1000); //设定定时器，循环执行           
+
+        }
+    </script>
+
 </head>
 
 <body>
+    <div align=left>
+        <audio src="DJ Okawari - Flower Dance.mp3" controls="controls" loop="loop" autoplay="autoplay">
+            <embed height="100" width="100" src="DJ Okawari - Flower Dance.mp3" /> 您的浏览器不支持 audio 标签。
+        </audio>
+    </div>
     <div class="container">
-        <h1>
-            尹竹林
-            <br>
-            <img width="500px" src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/crop%3D20%2C25%2C559%2C369%3Bc0%3Dbaike80%2C5%2C5%2C80%2C26/sign=1735654efe03738dca0556628e29807d/34fae6cd7b899e51a18720fa4aa7d933c9950dd6.jpg"
-                alt="图片">
-        </h1>
+        <div class="ani">
 
-        <h4>
-            <a href="form.html" target="_blank">表单链接</a> |
-            <a href="https://share.weiyun.com/7319b4f67c57bd655f30d76abf26f55f" target="_blank">我的作品</a> |
-            <a href="http://www.suibe.edu.cn/" target="_blank">我的学校</a>|
-            <a href="homework1.html" target="_blank">web作业1</a>
-        </h4>
-        <hr style="background-color:rgb(120, 122, 233);height: 1px;">
+            <h1>
+                尹竹林
+                <br>
+                <img width="500px" src="https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/crop%3D20%2C25%2C559%2C369%3Bc0%3Dbaike80%2C5%2C5%2C80%2C26/sign=1735654efe03738dca0556628e29807d/34fae6cd7b899e51a18720fa4aa7d933c9950dd6.jpg"
+                    alt="图片">
+            </h1>
 
-        <ul>
+            <h4>
+                <a href="form.html" target="_blank">表单链接</a> |
+                <a href="https://share.weiyun.com/7319b4f67c57bd655f30d76abf26f55f" target="_blank">我的作品</a> |
+                <a href="http://www.suibe.edu.cn/" target="_blank">我的学校</a>|
+                <a href="homework1.html" target="_blank">web作业1</a>
+            </h4>
+            <hr style="background-color:rgb(120, 122, 233);height: 1px;">
 
-            <li>
-                性别：男</li>
-            <li>
-                邮箱：suibiansuibianwo@163.com</li>
-            <li>
-                生日：1997.09.23</li>
-            <li>兴趣：打球，下棋，玩游戏；读书，吹牛,看动漫。</li>
-            <li>
-                座右铭:我们所过的每一个平凡的日常，也许就是连续发生的奇迹。
-                <a href="https://www.bilibili.com/bangumi/play/ep15165" target="_blank">(出处)
-                </a>
-            </li>
-        </ul>
-        <hr style="background-color:rgb(120, 122, 233);height: 1px;">
-        <h2>教育背景</h2>
-        <table>
+            <ul>
 
-            <tr height="100px">
-                <th width="300px">时间</th>
-                <th width="300px">学校</th>
-                <th width="300px">职务</th>
-            </tr>
-            <tr height="100px"></tr>
-            <tr height="100px"></tr>
-            <tr height="100px"></tr>
-        </table>
-        <h2>自我介绍
-        </h2>
-        <p>
-            <ol>
-                <li>有时我很懒，至少现在不是。</li>
-                <li> 爱玩游戏，不过现在不想玩。</li>
-                <li>学习中。。。。。。 </li>
-            </ol>
+                <li>
+                    性别：男</li>
+                <li>
+                    邮箱：suibiansuibianwo@163.com</li>
+                <li>
+                    生日：1997.09.23</li>
+                <li>兴趣：打球，下棋，玩游戏；读书，吹牛,看动漫。</li>
+                <li>
+                    座右铭:我们所过的每一个平凡的日常，也许就是连续发生的奇迹。
+                    <a href="https://www.bilibili.com/bangumi/play/ep15165" target="_blank">(出处)
+                    </a>
+                </li>
+            </ul>
+            <hr style="background-color:rgb(120, 122, 233);height: 1px;">
+            <h2>教育背景</h2>
+            <table>
 
-        </p>
+                <tr height="100px">
+                    <th width="200px"></th>
+                    <th width="300px">时间</th>
+                    <th width="300px">学校</th>
+                    <th width="300px">职务</th>
+                </tr>
+                <tr height="100px"></tr>
+                <tr height="100px"></tr>
+                <tr height="100px"></tr>
+            </table>
+            <h2>自我介绍
+            </h2>
+            <p>
+                <ol>
+                    <li>有时我很懒，至少现在不是。</li>
+                    <li> 爱玩游戏，不过现在不想玩。</li>
+                    <li>学习中。。。。。。 </li>
+                </ol>
+
+            </p>
 
 
-
+            <div class="footer">
+                <div id="timeShow" class="time1"></div>
+            </div>
+        </div>
     </div>
 </body>
 

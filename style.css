@@ -105,11 +105,9 @@ ol{
     @media(max-width:800px) {
         .container {
             width: 100%;
+            background-size: 100%;
         }
         .footer {
-            width: 100%;
-        }
-        .img{
             width: 100%;
         }
     }

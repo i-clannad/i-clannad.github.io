@@ -26,12 +26,11 @@ h2 {
 
 a {
     text-decoration: none;
-    color: rgb(153, 219, 221); 
+    color: rgb(153, 219, 221);
 }
-a:visited{
-
+.img{
+    width:500px;
 }
-
 hr {
     color: rgb(10, 146, 236);
 }
@@ -70,7 +69,6 @@ audio {
         background-repeat: no-repeat;
         background-position: left;
         background-size: cover;
-        
     }
     100% {
         background-image: url("1.png");
@@ -85,8 +83,9 @@ audio {
     padding: 0;
     width: 800px;
 }
-ol{
-    margin:0;
+
+ol {
+    margin: 0;
 }
 
 .time1 {
@@ -94,12 +93,11 @@ ol{
     height: 50px;
     line-height: 50px;
     text-align: center;
-    color:white;
+    color: white;
 }
 
 @media(max-width:1000px) {
     audio {
-        position: absolute;
         display: none;
     }
     @media(max-width:800px) {
@@ -107,21 +105,30 @@ ol{
             width: 100%;
             background-size: 100%;
         }
+       
         .footer {
             width: 100%;
         }
+        @media(max-width:500px) {
+            .img{
+                width:100%;
+            }
+        }
     }
 }
-img{
+
+img {
     transition: 5s;
 }
-img:hover
-{
-  transform:rotate(360deg);
+
+img:hover {
+    transform: rotate(360deg);
 }
-h1{
+
+h1 {
     transition: 2s;
 }
-h1:active{
+
+h1:active {
     font-size: 50px;
 }

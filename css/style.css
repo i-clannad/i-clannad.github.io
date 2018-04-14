@@ -81,5 +81,11 @@ body {
     }
 }
 .mycode{
-    margin: 50px,0,50px,0
+    margin: 50px,0,50px,0;
+}
+.center{
+    text-align: center;
+}
+.bc{
+    background-color: rgb(0, 174, 255);
 }

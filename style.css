@@ -3,7 +3,7 @@ body {
     padding: 0;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
     text-align: left;
-    background: grey;
+    background: url(http://key.visualarts.gr.jp/common/bg_body.gif) #F5F5EE repeat-x;
 }
 
 h1 {
@@ -28,9 +28,11 @@ a {
     text-decoration: none;
     color: rgb(153, 219, 221);
 }
-.img{
-    width:500px;
+
+.img {
+    width: 500px;
 }
+
 hr {
     color: rgb(10, 146, 236);
 }
@@ -105,14 +107,12 @@ ol {
             width: 100%;
             background-size: 100%;
         }
-       
         .footer {
             width: 100%;
         }
-        
         @media(max-width:500px) {
-            .img{
-                width:100%;
+            .img {
+                width: 100%;
             }
         }
     }

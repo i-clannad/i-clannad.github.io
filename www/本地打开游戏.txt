@@ -1,0 +1,7 @@
+1.��cmd
+
+2.�������´��루���������ڵ����ݣ�
+"C:\Program Files\Google\Chrome\Application\chrome.exe" (�ȸ�λ��)--disable-web-security --user-agent="Android" --user-data-dir="C:/temp-chrome-eng" --app="file:///C:\Users\aa\Desktop\www\index.html����Ϸλ�ã�
+
+����������������������������������������������������������������������������
+

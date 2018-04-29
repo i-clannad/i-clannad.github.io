@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!-- 游戏只设有五个关卡 -->
+
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style type="text/css">
+        /*几个按钮样式*/
+
+        @import url(https://fonts.googleapis.com/css?family=Terminal+Dosis);
+
+        html {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            background-color: hsl(0, 0%, 18%);
+
+
+        }
+
+        body {
+            margin: 0;
+            padding: 50px;
+            text-align: center;
+            font: 83px/68px "Droid Sans", "Lucida Grande", Lucida, Verdana, sans-serif;
+            color: whitesmoke;
+
+
+        }
+
+
+        /* Space CaCSS ------------------------------------------------- */
+
+        .btn {
+            display: inline-block;
+            position: relative;
+            width: 200px;
+            height: 150px;
+            margin: 0px auto;
+            border-radius: 50%;
+            border: 10px solid hsla(0, 0%, 0%, .7);
+            box-shadow: inset 0 15px 15px -5px hsla(0, 0%, 100%, .7),
+            inset 0 -5px 10px 3px hsla(0, 0%, 0%, .6),
+            0 8px 10px 2px hsla(0, 0%, 0%, .3);
+
+            background-position: center;
+            transform: scale(.66);
+            transition: transform .5s cubic-bezier(.32, 0, .15, 1);
+            padding-top: 50px;
+            padding-bottom: 0px;
+        }
+
+        .btn:hover {
+            cursor: pointer;
+            /*   transform: scale(0); */
+            transition: transform .2s cubic-bezier(.32, 0, .15, 1);
+        }
+
+
+
+        /* Particle Ping Pong -------------------------------------------- */
+
+        .particle {
+            margin-top: 0px;
+            background-size: 12px 12px;
+            background-color: #000;
+
+            /* the default highlight was too strong */
+            box-shadow: inset 0 15px 15px -5px hsla(0, 0%, 100%, .25), inset 0 -5px 10px 3px hsla(0, 0%, 0%, .6), 0 8px 10px 2px hsla(0, 0%, 0%, .3);
+            background-image: radial-gradient( #555 0px, hsla(0, 0%, 0%, 0) 2px, hsla(0, 0%, 0%, 0) 24px),
+            repeating-radial-gradient( white 0px, black 2px, black 48px);
+        }
+
+        .particle:hover {
+            animation: particle-size .24s linear infinite, particle-positon .48s linear infinite alternate;
+        }
+
+        @keyframes particle-size {
+            from {
+                background-size: 6px 6px, 12px 12px;
+            }
+            to {
+                background-size: 12px 12px, 24px 24px;
+            }
+        }
+
+        @keyframes particle-positon {
+            from {
+                background-position: 0px, 0px;
+            }
+            to {
+                background-position: 70px, 70px;
+            }
+        }
+
+
+
+
+
+        /* Growing cells -------------------------------------------- */
+
+        .cells {
+            background-size: 24px 24px;
+            background-color: #fff;
+            background-image: repeating-radial-gradient( black 8px, white 12px);
+        }
+
+        .cells:hover {
+            animation: cells 0.4s linear infinite;
+        }
+
+        @keyframes cells {
+            from {
+                background-size: 12px 12px;
+            }
+            to {
+                background-size: 24px 24px;
+            }
+        }
+
+
+
+
+
+        /* Jelly -------------------------------------------- */
+
+        .jelly {
+            background-size: 60px 60px;
+            background-color: hsla(320, 80%, 60%, 1);
+            background-image: repeating-radial-gradient( hsla(320, 100%, 60%, .6) 0px, hsla(220, 100%, 60%, 0) 60%),
+            repeating-radial-gradient( hsla(330, 100%, 40%, 1) 12%, hsla(320, 80%, 60%, 1) 24px);
+        }
+
+        .jelly:hover {
+            animation: jelly 1.4s cubic-bezier(.1, .4, .9, .6) infinite;
+        }
+
+        @keyframes jelly {
+            from {
+                background-size: 60px 60px, 24px 24px;
+            }
+            50% {
+                background-size: 120px 120px, 100px 100px;
+            }
+            to {
+                background-size: 24px 24px, 140px 140px;
+            }
+        }
+
+
+
+
+        /* Blobbs -------------------------------------------- */
+
+        .blobbs {
+            background-size: 66px 66px;
+            background-color: hsl(200, 100%, 50%);
+            background-image: repeating-radial-gradient( hsla(200, 100%, 80%, .8) 0px, hsla(200, 100%, 80%, .5) 4px, hsla(200, 100%, 80%, 0) 50px),
+            repeating-radial-gradient( hsla(260, 100%, 0%, 0) 0px, hsla(260, 100%, 50%, .1) 2px, hsla(260, 100%, 0%, 0) 10px);
+        }
+
+        .blobbs:hover {
+            animation: blobbs-position 6s cubic-bezier(.4, 0, .2, 1) infinite,
+            blobbs-size .75s cubic-bezier(.4, 0, .2, 1) infinite alternate;
+        }
+
+        @keyframes blobbs-position {
+            0% {
+                background-position: left top, left top;
+            }
+            25% {
+                background-position: right top, left bottom;
+            }
+            50% {
+                background-position: right bottom, right bottom;
+            }
+            75% {
+                background-position: left bottom, right top;
+            }
+            100% {
+                background-position: left top, left top;
+            }
+        }
+
+        @keyframes blobbs-size {
+            from {
+                background-size: 200px 200px, 200px 200px;
+            }
+            to {
+                background-size: 66px 66px, 66px 66px;
+            }
+        }
+
+
+
+
+        /* The Chase -------------------------------------------- */
+
+        .chase {
+            background-repeat: no-repeat, repeat;
+            background-size: 180px 180px;
+            background-color: hsl(50, 100%, 70%);
+            background-image: repeating-radial-gradient( hsla(50, 100%, 100%, 1) 0px, hsla(50, 100%, 90%, 1) 10px, hsla(50, 100%, 70%, .2) 12px, hsla(50, 100%, 70%, 0) 130px),
+            repeating-radial-gradient( hsla(20, 100%, 50%, 0) 20%, hsla(20, 100%, 50%, .4) 80%, hsla(50, 100%, 70%, 1) 120px);
+        }
+
+        .chase:hover {
+            animation: chase-position 1.2s infinite, chase-size .4s infinite alternate;
+        }
+
+        @keyframes chase-position {
+            0% {
+                background-position: left top, left top;
+            }
+            25% {
+                background-position: right top, left bottom;
+            }
+            50% {
+                background-position: right bottom, right bottom;
+            }
+            75% {
+                background-position: left bottom, right top;
+            }
+            100% {
+                background-position: left top, left top;
+            }
+        }
+
+        @keyframes chase-size {
+            from {
+                background-size: 120px 120px, 300px 300px;
+            }
+            50% {
+                background-size: 160px 160px, 150px 150px;
+            }
+            to {
+                background-size: 180px 180px, 100px 100px;
+            }
+        }
+
+
+        /*球落地，点击取消后出现的按钮*/
+
+        .a_demo_five {
+            background-color: #9827d3;
+            width: 150px;
+            display: inline-block;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 12px;
+            text-decoration: none;
+            color: #fff;
+            position: relative;
+            margin-top: 40px;
+            padding-bottom: 10px;
+            padding-top: 10px;
+            background-image: linear-gradient(bottom, rgb(168, 48, 232) 100%, rgb(141, 32, 196) 0%);
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+            box-shadow: inset 0px 1px 0px #ca73f8, 0px 5px 0px 0px #6a1099, 0px 10px 5px #999;
+        }
+
+        .a_demo_five:active {
+            top: 3px;
+            background-image: linear-gradient(bottom, rgb(168, 48, 232) 0%, rgb(141, 32, 196) 100%);
+            box-shadow: inset 0px 4px 1px #7215a3, 0px 2px 0px 0px #6a1099, 0px 5px 3px #999;
+        }
+
+        .a_demo_five::before {
+            background-color: #fff;
+            background-image: url(../images/heart.gif);
+            background-repeat: no-repeat;
+            background-position: center center;
+            border-left: solid 1px #CCC;
+            border-top: solid 1px #CCC;
+            border-right: solid 1px #CCC;
+            content: "";
+            width: 148px;
+            height: 40px;
+            position: absolute;
+            top: -30px;
+            left: 0px;
+            margin-top: -11px;
+            z-index: -1;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .a_demo_five:active::before {
+            top: -33px;
+            box-shadow: 0px 3px 0px #ccc;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            background: url(http://key.visualarts.gr.jp/common/bg_body.gif) #F5F5EE repeat-x;
+
+            background-size: 100% 100%;
+        }
+
+        p {
+            font: 13px/18px "Droid Sans", "Lucida Grande", Lucida, Verdana, sans-serif;
+        }
+
+        #game {
+            position: relative;
+            margin: 40px auto;
+            width: 900px;
+            height: 500px;
+            border: 1px solid white;
+            box-shadow: 0px 0px 25px white;
+            border-radius: 20px;
+        }
+
+        #wrap {
+            position: absolute;
+            width: inherit;
+            height: 500px;
+            margin-top: 20px;
+            /* border:1px solid red; */
+        }
+
+        #wrap div {
+            position: absolute;
+            width: 45px;
+            height: 15px;
+            top: 0;
+            left: 0;
+            background: transparent;
+            box-shadow: 0 0 9px 1px red;
+        }
+
+        #ward {
+            position: absolute;
+            width: 120px;
+            height: 30px;
+            left: 730px;
+            top: 470px;
+            background: #368;
+            border-radius: 10px;
+        }
+
+        #ball {
+            position: absolute;
+            left: 780px;
+            top: 460px;
+            width: 15px;
+            height: 15px;
+            background-color: #00ff00;
+            border-radius: 50%;
+            box-shadow: 0 0 9px 9px #9f0;
+        }
+
+        #grade {
+            width: 250px;
+            height: 50px;
+            border: 1px solid red;
+            text-align: center;
+            margin: 20px auto;
+            color: white;
+            font-size: 30px;
+        }
+
+        #main {
+            /* position: absolute; */
+            display: none;
+            width: 902px;
+            height: 600px;
+            margin: 60px auto;
+            /*待玩家选完关卡之后再显示*/
+        }
+
+        #game-end-div {
+            position: absolute;
+            width: 300px;
+            height: 200px;
+            margin: -500px auto;
+            border: 1px solid red;
+            font-size: 20px;
+            opacity: 0;
+            z-index: -2;
+            background-image: linear-gradient(hsla(200, 100%, 50%, 0.41), hsla(200, 100%, 50%, 0.5));
+            color: hsla(50, 100%, 90%, 0.75);
+            ;
+            font-weight: 800;
+            font-family: cursive;
+            text-align: center;
+            padding-top: 30px;
+            box-sizing: border-box;
+            box-shadow: 20px 20px 200px 2px hsla(200, 100%, 80%, .5);
+        }
+
+        #clickBtn {
+            text-decoration: none;
+            color: hsla(180, 14%, 82%, 0.7);
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="chooseGqDiv">
+        <div class="btn particle" onclick="chooseGq(1)">1</div>
+        <div class="btn cells" onclick="chooseGq(2)">2</div>
+        <div class="btn jelly" onclick="chooseGq(3)">3</div>
+        <div class="btn blobbs" onclick="chooseGq(4)">4</div>
+        <div class="btn chase" onclick="chooseGq(5)">5</div>
+        <p id="tip">本游戏只设置五个关卡，请玩家自行选定关卡</p>
+    </div>
+
+    <div id="main">
+        <!--计分-->
+        <div id="grade">
+            分数：
+            <span id="gradeBlank"></span>
+        </div>
+        <!--游戏区域-->
+        <div id="game">
+            <div id="wrap"></div>
+            <!--砖块区域-->
+            <div id="ward"></div>
+            <!--挡板-->
+            <div id="ball"></div>
+            <!--小球-->
+        </div>
+    </div>
+    <div id="game-end-div">
+        <div id="result"></div>
+        <div id="text">
+            <a id="clickBtn" type="button">重新开始游戏</a>
+        </div>
+    </div>
+
+</body>
+
+<script type="text/javascript">
+    //需要解决
+
+    //待解决
+    //1.玩家控制小球速度
+    //*2.支持玩家选择关卡（已解决）
+    //3.响应式
+    //4.长摁鼠标加速
+    //5.增加键盘控制挡板运动
+    //6.setTimeOut动画效果不流畅 和ie有差异
+    var oBall = document.querySelector('#ball');
+    var oWard = document.querySelector('#ward'); //挡板
+    var oWrap = document.querySelector('#wrap'); //砖块区域
+    var oGradeBlank = document.querySelector('#gradeBlank');
+    var oDocu = document.querySelector('#game'); //游戏区域
+    var oGameEndDiv = document.querySelector("#game-end-div");
+    var oText = document.querySelector("#text");
+    var oResult = document.querySelector("#result");
+    var oBtn = document.querySelector("#clickBtn");
+
+    function Breakout(ward, wrap, ball, docu, para, speed) {
+        this.x = 0;
+        this.y = 0;
+        this.speed = speed;
+        this.xSpeed = this.speed; //10
+        this.ySpeed = -this.speed; //-10
+        this.ward = ward;
+        this.wrap = wrap;
+        this.docu = docu;
+        this.ball = ball;
+        this.gameEndDiv = oGameEndDiv;
+        this.text = oText;
+        this.result = oResult;
+        this.grade = 0;
+        this.flag = 0;
+        this.grade = 0;
+        this.gqNumber = para; //关卡 传参进来
+        this.gradeNumber = 64;
+        this.interval = null;
+        this.end = false;
+        this.cWidth = document.getElementsByTagName("body")[0];
+        this.oriHref = null;
+        this.btn = oBtn;
+        // this.intervalSpeed=intervalspeed;
+    }
+    Breakout.prototype = {
+        init: function () {
+            var _this = this;
+            // this.cWidth.style.width=1351+"px";
+            this.oriHref = decodeURI(window.location.href);
+            this.gameEndDiv.style.marginLeft = (this.cWidth.offsetWidth - this.gameEndDiv.offsetWidth) / 2 +
+                "px";
+            this.createBrick(this.gqNumber);
+            this.wardMove(); //给挡板添加mousemove事件
+            this.ballStart();
+            this.checkEnd(this.gradeNumber); //判断游戏是否结束，当所有砖块均被击落。            
+        },
+        createBrick: function (n) {
+            // alert('第'+n+'关！');
+
+            switch (n) {
+                case 1:
+                    {
+                        // num=8;   第一关8行 15
+                        this.gradeNumber = 64;
+                        create(8, 0);
+                        break;
+                    };
+                case 2:
+                    {
+                        // num=9;第二关9行 9：17
+                        this.gradeNumber = 81;
+                        create(9, 0);
+                        break;
+
+                    };
+                case 3:
+                    {
+                        // num=9;第三关10行 第10行17个砖块
+                        this.gradeNumber = 98;
+                        create(10, 1);
+                        break;
+
+                    };
+                case 4:
+                    { // 第四关11行 第10行9个砖块 第11行9个砖块
+                        num = 9;
+                        this.gradeNumber = 115;
+                        create(11, 1);
+                        break;
+
+                    };
+                case 5:
+                    { // 第四关12行 第10行9个砖块 第11行9个砖块 第12行9个砖块
+                        num = 9;
+                        this.gradeNumber = 132;
+                        create(12, 1);
+                        break;
+                    }
+                    // }
+                    function create(num, n) {
+                        // num:行数，
+                        // var  w=45*2;
+                        // var h=15*2;
+                        var w = 25 * 2;
+                        var h = 10 * 2;
+                        var x = document.querySelector('#game').offsetWidth / 2 - 45 / 2; //628.5
+                        switch (n) {
+                            case 0:
+                                {
+                                    for (var i = 1; i <= num; i++) {
+                                        for (var j = 0; j < (2 * i - 1); j++) {
+                                            var brickDiv = document.createElement('div');
+                                            this.wrap.appendChild(brickDiv);
+                                            brickDiv.style.top = (i - 1) * h + 'px';
+                                            brickDiv.style.left = x + ((j + 1) - i) * w + 'px';
+                                            // console.log(x);    
+                                        }
+                                    }
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    for (var i = 1; i <= 9; i++) {
+                                        for (var j = 0; j < (2 * i - 1); j++) {
+                                            var brickDiv = document.createElement('div');
+                                            this.wrap.appendChild(brickDiv);
+                                            brickDiv.style.top = (i - 1) * h + 'px';
+                                            brickDiv.style.left = x + ((j + 1) - i) * w + 'px';
+                                        }
+                                    }
+                                    switch (num) {
+                                        case 10:
+                                            {
+                                                for (var i = 9; i < num; i++) {
+                                                    for (var j = 0; j < 17; j++) {
+                                                        var brickDiv = document.createElement('div');
+                                                        this.wrap.appendChild(brickDiv);
+                                                        brickDiv.style.top = (num - 1) * h + 'px';
+                                                        brickDiv.style.left = 29 + w * j + 'px';
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        case 11:
+                                            {
+                                                for (var i = 9; i < num; i++) {
+                                                    for (var j = 0; j < 17; j++) {
+                                                        var brickDiv = document.createElement('div');
+                                                        this.wrap.appendChild(brickDiv);
+                                                        brickDiv.style.top = i * h + 'px';
+                                                        brickDiv.style.left = 29 + w * j + 'px';
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                        case 12:
+                                            {
+                                                for (var i = 9; i < num; i++) {
+                                                    for (var j = 0; j < 17; j++) {
+                                                        var brickDiv = document.createElement('div');
+                                                        this.wrap.appendChild(brickDiv);
+                                                        brickDiv.style.top = i * h + 'px';
+                                                        brickDiv.style.left = 29 + w * j + 'px';
+                                                    }
+                                                }
+                                                break;
+                                            }
+                                    }
+                                }
+                        }
+                    }
+            }
+        },
+        wardMove: function () {
+            this.addevent(this.docu, 'mousemove', this.mouseMove.bind(this));
+            // this.addevent(this.ward,'mousemove',this.mouseMove.bind(this));
+        },
+        mouseMove: function (e) {
+            var e = window.event || e;
+            console.log("e.pageX---" + e.pageX);
+            console.log("ward.left" + this.ward.offsetLeft);
+            // console.log((e.pageX)>=(this.cWidth.offsetWidth-this.wrap.offsetWidth)/2);
+            // console.log(e.pageX<=this.wrap.offsetLeft+this.wrap.offsetWidth);
+            // console.log(e.pageX<=(this.cWidth.offsetWidth-this.wrap.offsetWidth)/2+this.wrap.offsetWidth);
+            var bodyWidth = document.getElementsByTagName('body')[0].offsetWidth;
+            // console.log("pageX:"+e.pageX+'----可视X'+bodyWidth);
+            if (((e.pageX) >= (this.cWidth.offsetWidth - this.wrap.offsetWidth) / 2 + this.ward.offsetWidth / 2) &&
+                e.pageX <= (this.cWidth.offsetWidth - this.wrap.offsetWidth) / 2 + this.wrap.offsetWidth) {
+                //控制鼠标和挡板不超过界限，即没有左右滚动条
+                var _left = e.pageX - 0.5 * this.ward.offsetWidth - (this.cWidth.offsetWidth - this.wrap.offsetWidth) /
+                    2;
+                this.ward.style.left = _left + 'px';
+                
+            }
+        },
+        ballStart: function () {
+            //点击小球游戏开始，小球开始运动
+            this.addevent(this.ball, 'click', this.ballMove.bind(this));
+        },
+        ballMove: function () {
+            if (this.interval || this.end == true) {
+                clearInterval(this.interval);
+            }
+            if (this.end == false) {
+                this.ballCrash(this.gradeNumber); //检测是否有碰撞
+                // setTimeout(this.ballMove.bind(this),0.01);
+                this.interval = setInterval(this.ballMove.bind(this), 1);
+            }
+        },
+        ballCrash: function (m) {
+            this.x = parseInt(this.ball.offsetLeft);
+            this.y = parseInt(this.ball.offsetTop);
+            var x = parseInt(this.ball.offsetLeft);
+            var h = parseInt(this.ball.offsetTop);
+
+            /*-----------------判断小球和挡板是否碰撞--------------------*/
+            if (Math.abs(this.x - this.ward.offsetLeft) < 120 && Math.abs(this.y - this.ward.offsetTop) < 30) {
+                this.ySpeed = -this.ySpeed;
+                this.y = this.ward.offsetTop - 40; //重置小球位置
+                this.ward.style.background = this.ranColor();
+            } else if (Math.abs(this.x - this.ward.offsetLeft) > 120 && this.y - this.ward.offsetTop >= 0) {
+                //没接住球
+                this.end = true;
+                this.checkStart();
+            }
+
+            /*------------------------------------------------判断小球和挡板是否碰撞完毕-----------------------------------------*/
+
+            /*-----------------------判断小球和砖块是否碰撞---------------------*/
+            for (var i = 0; i < this.wrap.children.length; i++) { //64
+                var brick = this.wrap.children[i];
+                if ((this.x - parseInt(brick.offsetLeft)) < (120 - 50) && (this.x - parseInt(brick.offsetLeft)) >
+                    0 && (this.y - parseInt(brick.offsetTop)) <= (30 - 20) && (this.y - parseInt(brick.offsetTop)) >=
+                    (0 + 10)) {
+                    this.ySpeed = -this.ySpeed;
+                    this.grade++;
+                    this.wrap.removeChild(brick);
+                }
+
+            }
+
+            oGradeBlank.innerHTML = this.grade;
+            this.checkEnd(m);
+            /*-----------------------------------------------判断小球和砖块是否碰撞完毕---------------------------------------*/
+
+            /*------------------------判断小球是否和墙壁碰撞-----------------------*/
+            if (x >= 900) {
+                //右边
+                this.xSpeed = -this.speed;
+            }
+            if (x <= 0) {
+                //左边
+                this.xSpeed = this.speed;
+            }
+            if (h >= 480) {
+                //下边
+                this.ySpeed = -this.speed;
+            }
+            if (h <= 0) {
+                //上边
+                this.ySpeed = this.speed;
+                clearInterval(this.interval);
+            }
+            //没有超出界限
+            this.x += this.xSpeed;
+            this.y += this.ySpeed;
+            this.ball.style.left = this.x + 'px';
+            this.ball.style.top = this.y + 'px';
+            /*-----------------------------------------------------判断小球和墙壁碰撞完毕---------------------------*/
+        },
+        checkStart: function () {
+            // alert(this.oriHref);
+            this.gameEndDiv.style.zIndex = 2;
+            // this.addevent(this.btn,'click',this.redirectTo.bind(this));
+            document.querySelector("#grade").style.opacity = 0;
+            document.getElementsByTagName("p")[0].style.opacity = 0;
+            this.docu.style.opacity = 0;
+            this.gameEndDiv.style.opacity = 1;
+            this.result.innerHTML = "第" + this.gqNumber + "轮游戏分数为：" + this.grade;
+            this.btn.href = this.oriHref;
+        },
+        checkEnd: function (m) {
+            if (this.grade == m) {
+
+                if (confirm("游戏结束，恭喜你！,是否开始下个关卡？")) {
+                    this.grade = 0;
+                    this.gqNumber += this.gqNumber;
+                    this.init();
+                    // this.ball.style.marginTop=-10+"px";
+                }
+            }
+        },
+        ranColor: function () {
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += '0123456789abcdef' [Math.floor(Math.random() * 16)];
+            }
+            return color;
+        },
+        addevent: function (element, type, handler) {
+            return element.addEventListener ? element.addEventListener(type, handler, false) : element.attachEvent(
+                'on' + type, handler);
+        },
+        removeHandler: function (element, type, handler) {
+            if (element.removeEventListener) {
+                element.removeEventListener(type, handler, false);
+            } else if (element.detachEvent) {
+                element.detachEvent('on' + type, handler);
+            } else {
+                element['on' + type] = null;
+            }
+        },
+    }
+
+    //选择关卡后才调用init函数
+    function chooseGq(para) {
+        var breakout = new Breakout(oWard, oWrap, oBall, oDocu);
+        var oMain = document.getElementById("main");
+        var oChooseDiv = document.getElementById("chooseGqDiv");
+        switch (para) {
+            case 1:
+                {
+                    oMain.style.display = "block";
+                    oChooseDiv.style.display = "none";
+                    var breakout = new Breakout(oWard, oWrap, oBall, oDocu, 1, 1);
+                    breakout.init();
+                    break;
+                }
+            case 2:
+                {
+                    oMain.style.display = "block";
+                    oChooseDiv.style.display = "none";
+                    var breakout = new Breakout(oWard, oWrap, oBall, oDocu, 2, 2);
+                    breakout.init();
+                    break;
+                }
+            case 3:
+                {
+                    oMain.style.display = "block";
+                    oChooseDiv.style.display = "none";
+                    var breakout = new Breakout(oWard, oWrap, oBall, oDocu, 3, 4);
+                    breakout.init();
+                    break;
+                }
+            case 4:
+                {
+                    oMain.style.display = "block";
+                    oChooseDiv.style.display = "none";
+                    var breakout = new Breakout(oWard, oWrap, oBall, oDocu, 4, 2, 5);
+                    breakout.init();
+                    break;
+                }
+            case 5:
+                {
+                    oMain.style.display = "block";
+                    oChooseDiv.style.display = "none";
+                    var breakout = new Breakout(oWard, oWrap, oBall, oDocu, 5, 7);
+                    breakout.init();
+                    break;
+                }
+
+        }
+    }
+    chooseGq();
+</script>
+
+</html>

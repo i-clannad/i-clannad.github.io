@@ -1,7 +1,8 @@
-1.ï¿½ï¿½cmd
+1.´ò¿ªcmd
 
-2.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â´ï¿½ï¿½ë£¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½Ý£ï¿½
-"C:\Program Files\Google\Chrome\Application\chrome.exe" (ï¿½È¸ï¿½Î»ï¿½ï¿½)--disable-web-security --user-agent="Android" --user-data-dir="C:/temp-chrome-eng" --app="file:///C:\Users\aa\Desktop\www\index.htmlï¿½ï¿½ï¿½ï¿½Ï·Î»ï¿½Ã£ï¿½
 
-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+2.ÊäÈëÒÔÏÂ´úÂë£¨²»º¬À¨ºÅÄÚµÄÄÚÈÝ£©
+"C:\Program Files\Google\Chrome\Application\chrome.exe" (¹È¸èÎ»ÖÃ)--disable-web-security --user-agent="Android" --user-data-dir="C:/temp-chrome-eng" --app="file:///C:\Users\aa\Desktop\www\index.html£¨ÓÎÏ·Î»ÖÃ£©
+
+¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
 
